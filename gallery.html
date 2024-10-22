@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lustria&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lustria', serif;
+            background-color: #ffe6f0;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #ff66b2;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery-container img {
+            width: 500px;
+            height: auto;
+            border: 8px solid #ff99cc;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff66b2;
+            border: none;
+            color: white;
+            font-size: 30px;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .arrow:hover {
+            background-color: #ff3399;
+        }
+
+        .left {
+            left: -60px;
+        }
+
+        .right {
+            right: -60px;
+        }
+
+        .dot-container {
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 5px;
+            background-color: #ff66b2;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .active-dot {
+            background-color: #ff3399;
+        }
+    </style>
+</head>
+<body>
+    <h2>Photo Gallery</h2>
+
+    <div class="gallery-container">
+        <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
+        <img id="galleryImage" src="https://images.outsideonline.com/wp-content/uploads/2022/11/20/221101-how-to-read-dog-body-language_s.jpg" alt="Gallery Image">
+        <button class="arrow right" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <div class="dot-container" id="dotContainer"></div>
+
+   <script>
+    const images = [
+        'photo1.jpg',
+        'photo2.jpg',
+        'photo3.jpg',
+        'photo4.jpg',
+        'photo5.jpg',
+        'photo6.jpg',
+        'photo7.jpg',
+        'photo8.jpg',
+        'photo9.jpg',
+        'photo10.jpg',
+        'photo11.jpg',
+        'photo12.jpg',
+        'photo13.jpg',
+        'photo14.jpg',
+        'photo15.jpg',
+        'photo16.jpg',
+        'photo17.jpg',
+        'photo18.jpg',
+        'photo19.jpg',
+        'photo20.jpg',
+        'photo21.jpg',
+        'photo22.jpg',
+        'photo23.jpg',
+        'photo24.jpg',
+        'photo25.jpg'
+    ];
+
+    let currentIndex = 0;
+
+    function changeImage(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) {
+            currentIndex = images.length - 1; 
+        } else if (currentIndex >= images.length) {
+            currentIndex = 0; 
+        }
+        updateImage();
+    }
+
+    function setImage(index) {
+        currentIndex = index;
+        updateImage();
+    }
+
+    function updateImage() {
+        document.getElementById('galleryImage').src = images[currentIndex];
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach(dot => dot.classList.remove('active-dot'));
+        dots[currentIndex].classList.add('active-dot');
+    }
+
+    function createDots() {
+        const dotContainer = document.getElementById('dotContainer');
+        for (let i = 0; i < images.length; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.onclick = () => setImage(i);
+            dotContainer.appendChild(dot);
+        }
+        document.querySelectorAll('.dot')[0].classList.add('active-dot');
+    }
+
+    // Initialize dots when page loads
+    createDots();
+</script>

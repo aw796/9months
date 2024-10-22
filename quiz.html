@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Who Loves The Other More</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lustria&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lustria', serif;
+            background-color: #ffe6f0;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff66b2;
+            font-size: 40px;
+            margin-bottom: 40px;
+        }
+
+        .button-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent the button from going off the page */
+        }
+
+        .button {
+            padding: 20px;
+            font-size: 24px;
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 20px;
+            position: relative;
+        }
+
+        .button:hover {
+            background-color: #ff3399;
+        }
+
+        .result {
+            color: #ff3399;
+            font-size: 40px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="quizTitle">Who loves the other more?</h1>
+    
+    <div class="button-container">
+        <button class="button" id="alvaanBtn" onclick="showWinMessage()">Alvaan</button>
+        <button class="button" id="yomnBtn" onclick="moveButton()">Yomn</button>
+    </div>
+
+    <h2 id="resultMessage" class="result"></h2>
+
+    <script>
+        // Ensures Yomn button moves within the screen boundaries
+        function moveButton() {
+            const yomnBtn = document.getElementById('yomnBtn');
+            const quizTitle = document.getElementById('quizTitle');
+
+            // Update title text
+            quizTitle.textContent = "Oops wrong! Try again";
+
+            // Get the dimensions of the window and button
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const buttonWidth = yomnBtn.offsetWidth;
+            const buttonHeight = yomnBtn.offsetHeight;
+
+            // Generate random positions but ensure they remain within the viewport
+            const randomX = Math.random() * (windowWidth - buttonWidth - 20); // -20 to add padding
+            const randomY = Math.random() * (windowHeight - buttonHeight - 20); // -20 to add padding
+
+            yomnBtn.style.position = "absolute";
+            yomnBtn.style.left = randomX + "px";
+            yomnBtn.style.top = randomY + "px";
+        }
+
+        // Displays the winning message when Alvaan button is clicked
+        function showWinMessage() {
+            const resultMessage = document.getElementById('resultMessage');
+            resultMessage.textContent = "WOOOHOOOO YOU WON!";
+            document.getElementById('quizTitle').textContent = "You got it right!";
+        }
+    </script>
+</body>
+</html>
+

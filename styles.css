@@ -1,0 +1,36 @@
+body {
+    font-family: 'Lustria', serif;
+    background-color: #f0f8ff;
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    margin: 50px auto;
+}
+
+button {
+    background-color: darkpink;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
+.flying-section, .timeline, .ocean-section, .end {
+    margin: 20px;
+}
+
+.timeline-points {
+    display: flex;
+    flex-direction: column;
+}
+
+.point {
+    margin: 10px 0;
+}
